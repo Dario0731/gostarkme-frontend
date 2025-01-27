@@ -1,22 +1,20 @@
 'use client';
 
 import ProgressBar from '@/components/ui/ProgressBar';
-import Image from 'next/image';
 import Footer from '@/components/ui/Footer';
 import Navbar from '@/components/ui/Navbar';
 import { walletStarknetkitLatestAtom } from '@/state/connectedWallet';
 import { useAtomValue } from 'jotai';
 import { navItems } from '@/constants';
 import { useState } from 'react';
- import Register from './register'; 
+import { Wallet, Star, Target } from 'lucide-react'; 
+import Register from './register';
 
 const UserProfilePage = () => {
   const wallet = useAtomValue(walletStarknetkitLatestAtom);
 
-  // Estado para simular el registro del usuario
   const [isRegistered, setIsRegistered] = useState(false);
 
-  // Mock data para diseño
   const totalDonations = 20000;
   const currentLevel = 10;
   const currentPoints = 300;
@@ -26,12 +24,9 @@ const UserProfilePage = () => {
     { action: 'Donated', amount: 200 },
   ];
 
-  // Calcular el progreso
   const progress = (currentPoints / totalPoints) * 100;
 
-
   if (!wallet && !isRegistered) {
-    // Case: No connected to wallet and not registered
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar
@@ -40,15 +35,13 @@ const UserProfilePage = () => {
           title="Go Stark Me"
           navItems={navItems}
         />
-        <Register /> // Mostrar la página de registro (comentado)
+        <Register />
         <Footer />
       </div>
     );
   }
 
-
   if (!wallet) {
-    // Case: not connected wallet
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar
@@ -68,7 +61,6 @@ const UserProfilePage = () => {
   }
 
   if (!isRegistered) {
-    // Case: Wallet connected but not register user
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar
@@ -77,14 +69,12 @@ const UserProfilePage = () => {
           title="Go Stark Me"
           navItems={navItems}
         />
-        <Register /> // Página de registro (comentado)
+        <Register />
         <Footer />
       </div>
     );
   }
 
-
-  // Case: Connected and register
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar
@@ -94,117 +84,90 @@ const UserProfilePage = () => {
         navItems={navItems}
       />
       <main className="flex flex-grow flex-col items-center bg-white p-6">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6 w-full text-left ml-[55%]">
-
-
-
+        <h2 className="text-3xl font-bold text-gray-900 mb-6 w-full text-left ml-[55%]">
           {wallet?.account?.address.slice(0, 5)}...{wallet?.account?.address.slice(-4)}'s Profile ✨
         </h2>
 
-{/* Donations and progress card */}
-<div className="w-full max-w-3xl bg-white shadow rounded-lg p-8 mb-6 border border-gray-300">
-  <div className="grid grid-cols-1 gap-y-6">
-    <div className="flex items-center">
-      <Image
-        src="/icons/miniWallet.png"
-        alt="Donations"
-        width={32}
-        height={32}
-        className="mr-3"
-      />
-      <div>
-        <p
-          className="text-[16px] font-bold leading-[29.3px] text-[#8D8D8D]"
-          style={{ fontFamily: "Helvetica Neue, sans-serif" }}
-        >
-          Total donations
-        </p>
-        <p className="text-xl font-bold text-gray-800">
-          {totalDonations} <span className="text-yellow-500">⭐</span>
-        </p>
-      </div>
-    </div>
-    <div className="flex items-center">
-      <Image
-        src="/icons/starWallet.png"
-        alt="Current level"
-        width={32}
-        height={32}
-        className="mr-3"
-      />
-      <div>
-        <p
-          className="text-[16px] font-bold leading-[29.3px] text-[#8D8D8D]"
-          style={{ fontFamily: "Helvetica Neue, sans-serif" }}
-        >
-          Current level
-        </p>
-        <p className="text-xl font-bold text-gray-800">
-          {currentLevel} <span className="text-yellow-500">⭐</span>
-        </p>
-      </div>
-    </div>
-  </div>
-  <div className="mt-6">
-  <p
-  className="text-[16px] font-bold leading-[29.3px] text-[#8D8D8D] mb-1 ml-[calc(32px+0.75rem)]"
-  style={{ fontFamily: "Helvetica Neue, sans-serif" }}
->
-  Progress to next level
-</p>
+        <div className="w-full max-w-3xl bg-white shadow rounded-lg p-8 mb-6 border border-gray-300">
+          <div className="grid grid-cols-1 gap-y-6">
+            <div className="flex items-center">
+              <Wallet className="mr-3" size={32} color="#9370DB" /> 
+              <div>
+                <p
+                  className="text-[16px] font-bold leading-[29.3px] text-[#8D8D8D]"
+                  style={{ fontFamily: 'Helvetica Neue, sans-serif' }}
+                >
+                  Total donations
+                </p>
+                <p className="text-xl font-bold text-gray-800">
+                  {totalDonations} <span className="text-yellow-500">⭐</span>
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <Star className="mr-3" size={32} color="#9370DB" />
+              <div>
+                <p
+                  className="text-[16px] font-bold leading-[29.3px] text-[#8D8D8D]"
+                  style={{ fontFamily: 'Helvetica Neue, sans-serif' }}
+                >
+                  Current level
+                </p>
+                <p className="text-xl font-bold text-gray-800">
+                  {currentLevel} <span className="text-yellow-500">⭐</span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-6">
+            <p
+              className="text-[16px] font-bold leading-[29.3px] text-[#8D8D8D] mb-1 ml-[calc(32px+0.75rem)]"
+              style={{ fontFamily: 'Helvetica Neue, sans-serif' }}
+            >
+              Progress to next level
+            </p>
 
+            <div className="ml-[calc(32px+0.75rem)]">
+              <p className="text-sm text-right text-gray-600 mb-0">
+                {currentPoints}/{totalPoints} <span className="text-yellow-500">⭐</span>
+              </p>
+              <ProgressBar progress={progress} />
+            </div>
+          </div>
+        </div>
 
-<div className="ml-[calc(32px+0.75rem)]">
-  <p className="text-sm text-right text-gray-600 mb-0">
-    {currentPoints}/{totalPoints} <span className="text-yellow-500">⭐</span>
-  </p>
-  <ProgressBar progress={progress} />
-</div>
-
-</div>
-
+        <div className="w-full max-w-3xl bg-white shadow rounded-lg p-6 border border-gray-300">
+        <div className="flex items-center mb-4">
+  <Target className="w-6 h-6 text-[#9370DB] mr-4" /> 
+  <h3
+    className="text-[20px] font-light leading-[33.85px] text-[#000000] opacity-80"
+    style={{ fontFamily: 'Arial, Helvetica Neue' }}
+  >
+    Recent activity
+  </h3>
 </div>
 
 
-{/* Recent activity cards */}
-<div className="w-full max-w-3xl bg-white shadow rounded-lg p-6 border border-gray-300">
-  <div className="flex items-center mb-4">
-    <img
-      src="/icons/focusIcon.png"
-      alt="Focus Icon"
-      className="w-8 h-8 mr-2 mb-7"
-    />
-    <h3
-      className="text-[20px] font-light leading-[33.85px] text-[#000000] opacity-80 mb-7"
-      style={{ fontFamily: "Arial, Helvetica Neue" }}
-    >
-      Recent activity
-    </h3>
-  </div>
-
-  {recentActivity.map((activity, index) => (
-    <div
-      key={index}
-      className="flex justify-between items-center bg-gray-200 p-3 rounded-lg mb-5 w-4/5 mx-auto"
-    >
-      <span
-        className="text-sm text-black"
-        style={{ fontFamily: "Arial, Helvetica Neue" }}
-      >
-        {activity.action}
-      </span>
-      <span
-        className="text-sm font-normal text-gray-900 flex items-center"
-        style={{ fontFamily: "Arial, Helvetica Neue" }}
-      >
-        {activity.amount} <span className="text-yellow-500 ml-2 text-lg">⭐</span>
-      </span>
-    </div>
-  ))}
-</div>
-
-
-
+          {recentActivity.map((activity, index) => (
+            <div
+              key={index}
+              className="flex justify-between items-center bg-gray-200 p-3 rounded-lg mb-5 w-4/5 mx-auto"
+            >
+              <span
+                className="text-sm text-black"
+                style={{ fontFamily: 'Arial, Helvetica Neue' }}
+              >
+                {activity.action}
+              </span>
+              <span
+                className="text-sm font-normal text-gray-900 flex items-center"
+                style={{ fontFamily: 'Arial, Helvetica Neue' }}
+              >
+                {activity.amount} <span className="text-yellow-500 ml-2 text-lg">⭐</span>
+              </span>
+            </div>
+          ))}
+        </div>
       </main>
       <Footer />
     </div>
