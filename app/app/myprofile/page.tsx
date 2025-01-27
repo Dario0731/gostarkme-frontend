@@ -8,7 +8,7 @@ import { walletStarknetkitLatestAtom } from '@/state/connectedWallet';
 import { useAtomValue } from 'jotai';
 import { navItems } from '@/constants';
 import { useState } from 'react';
-// import Register from './register'; // Componente de registro (comentado)
+ import Register from './register'; 
 
 const UserProfilePage = () => {
   const wallet = useAtomValue(walletStarknetkitLatestAtom);
@@ -29,10 +29,9 @@ const UserProfilePage = () => {
   // Calcular el progreso
   const progress = (currentPoints / totalPoints) * 100;
 
-  // Validaciones
-  /*
+
   if (!wallet && !isRegistered) {
-    // Caso: No conectado a la wallet y no registrado
+    // Case: No connected to wallet and not registered
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar
@@ -46,10 +45,10 @@ const UserProfilePage = () => {
       </div>
     );
   }
-  */
+
 
   if (!wallet) {
-    // Caso: Wallet no conectada
+    // Case: not connected wallet
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar
@@ -68,9 +67,8 @@ const UserProfilePage = () => {
     );
   }
 
-  /*
   if (!isRegistered) {
-    // Caso: Wallet conectada pero usuario no registrado
+    // Case: Wallet connected but not register user
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar
@@ -84,9 +82,9 @@ const UserProfilePage = () => {
       </div>
     );
   }
-  */
 
-  // Caso: Wallet conectada y usuario registrado
+
+  // Case: Connected and register
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar
