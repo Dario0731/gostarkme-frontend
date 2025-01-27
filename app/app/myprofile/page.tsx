@@ -101,7 +101,7 @@ const UserProfilePage = () => {
           {wallet?.account?.address.slice(0, 5)}...{wallet?.account?.address.slice(-4)}'s Profile ✨
         </h2>
 
-{/* Card de donaciones y progreso */}
+{/* Donations and progress card */}
 <div className="w-full max-w-3xl bg-white shadow rounded-lg p-8 mb-6 border border-gray-300">
   <div className="grid grid-cols-1 gap-y-6">
     <div className="flex items-center">
@@ -166,7 +166,7 @@ const UserProfilePage = () => {
 </div>
 
 
-{/* Card de actividad reciente */}
+{/* Recent activity cards */}
 <div className="w-full max-w-3xl bg-white shadow rounded-lg p-6 border border-gray-300">
   <div className="flex items-center mb-4">
     <img
